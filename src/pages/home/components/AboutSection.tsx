@@ -55,7 +55,7 @@ export default function AboutSection() {
             <div className="w-full h-[550px] rounded-2xl overflow-hidden" style={{ border: '3px solid rgba(76,175,125,0.2)' }}>
               <img
                 src="https://storage.readdy-site.link/project_files/b873666f-f57d-4993-b41c-b9c395fd31fd/7812335c-6336-480a-ae5b-bb84f5daebc6_VNefv.jpg?v=c3e717cd070df3e8d37d1ead62b23116"
-                alt="Tchalove Mbakop"
+                alt="Portrait de Tchalove Mbakop, artiste camerounaise"
                 className="w-full h-full object-cover object-top"
               />
             </div>

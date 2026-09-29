@@ -1,12 +1,17 @@
+import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
-import NotFound from "../pages/NotFound";
 import Home from "../pages/home/page";
-import CheckoutPage from "../pages/checkout/page";
-import CheckoutSuccessPage from "../pages/checkout/success";
-import CheckoutCancelPage from "../pages/checkout/cancel";
-import LoginPage from "../pages/auth/login";
-import SignUpPage from "../pages/auth/signup";
-import AccountPage from "../pages/account/page";
+import Lazy from "./Lazy";
+
+// Pages secondaires chargées à la demande pour alléger la page d'accueil
+const NotFound = lazy(() => import("../pages/NotFound"));
+const CheckoutPage = lazy(() => import("../pages/checkout/page"));
+const CheckoutSuccessPage = lazy(() => import("../pages/checkout/success"));
+const CheckoutCancelPage = lazy(() => import("../pages/checkout/cancel"));
+const LoginPage = lazy(() => import("../pages/auth/login"));
+const SignUpPage = lazy(() => import("../pages/auth/signup"));
+const AccountPage = lazy(() => import("../pages/account/page"));
+
 
 const routes: RouteObject[] = [
   {
@@ -15,31 +20,31 @@ const routes: RouteObject[] = [
   },
   {
     path: "/checkout",
-    element: <CheckoutPage />,
+    element: <Lazy><CheckoutPage /></Lazy>,
   },
   {
     path: "/checkout/success",
-    element: <CheckoutSuccessPage />,
+    element: <Lazy><CheckoutSuccessPage /></Lazy>,
   },
   {
     path: "/checkout/cancel",
-    element: <CheckoutCancelPage />,
+    element: <Lazy><CheckoutCancelPage /></Lazy>,
   },
   {
     path: "/connexion",
-    element: <LoginPage />,
+    element: <Lazy><LoginPage /></Lazy>,
   },
   {
     path: "/inscription",
-    element: <SignUpPage />,
+    element: <Lazy><SignUpPage /></Lazy>,
   },
   {
     path: "/mon-compte",
-    element: <AccountPage />,
+    element: <Lazy><AccountPage /></Lazy>,
   },
   {
     path: "*",
-    element: <NotFound />,
+    element: <Lazy><NotFound /></Lazy>,
   },
 ];
 

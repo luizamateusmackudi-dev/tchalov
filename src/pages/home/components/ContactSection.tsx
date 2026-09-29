@@ -1,5 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
 
+// Liens courriel pré-remplis (en attendant le branchement d'un vrai formulaire)
+const mailBody = [
+  'Bonjour Tchalove,',
+  '',
+  'Nom :',
+  'Téléphone :',
+  'Type de demande (collaboration, presse, booking, autre) :',
+  '',
+  'Votre message :',
+  '',
+  '',
+].join('\n');
+const buildMailto = (to: string, subject: string) =>
+  `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+const MAILTO_CONTACT = buildMailto('contact@tchalovembakop.com', 'Demande de contact via le site Tchalove Mbakop');
+const MAILTO_BOOKING = buildMailto('booking@tchalovembakop.com', 'Demande de booking via le site Tchalove Mbakop');
+
 export default function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -35,16 +52,25 @@ export default function ContactSection() {
                 Restons en<br />
                 <span className="italic" style={{ color: '#2D7A4F' }}>Contact</span>
               </h2>
-              <p className="font-light leading-relaxed text-[15px] mb-12" style={{ color: '#4A6741', opacity: 0.8 }}>
+              <p className="font-light leading-relaxed text-[15px] mb-8" style={{ color: '#4A6741', opacity: 0.8 }}>
                 Pour toute demande de collaboration artistique, presse, management ou booking, n'hésitez pas à me contacter.&nbsp;
               </p>
+
+              <a
+                href={MAILTO_CONTACT}
+                className="cursor-pointer inline-flex items-center gap-3 px-7 py-3.5 rounded-full text-sm font-medium tracking-wide text-white mb-12 transition-all duration-200 hover:opacity-90"
+                style={{ background: '#2D7A4F' }}
+              >
+                <i className="ri-mail-send-line text-base" />
+                Écrire un message
+              </a>
 
               {/* Contact Info */}
               <div className="space-y-5">
                 {[
-                  { icon: 'ri-mail-line', label: 'Email', value: 'contact@tchalovembakop.com' },
-                  { icon: 'ri-briefcase-line', label: 'Management', value: 'booking@tchalovembakop.com' },
-                  { icon: 'ri-map-pin-line', label: 'Basée AU', value: 'Canada' },
+                  { icon: 'ri-mail-line', label: 'Email', value: 'contact@tchalovembakop.com', href: MAILTO_CONTACT },
+                  { icon: 'ri-briefcase-line', label: 'Management', value: 'booking@tchalovembakop.com', href: MAILTO_BOOKING },
+                  { icon: 'ri-map-pin-line', label: 'Basée AU', value: 'Canada', href: undefined },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-4">
                     <div className="w-10 h-10 flex items-center justify-center rounded-full shrink-0" style={{ border: '1px solid rgba(76,175,125,0.3)', background: 'rgba(76,175,125,0.08)' }}>
@@ -52,7 +78,11 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <div className="text-xs tracking-widest uppercase mb-0.5" style={{ color: '#4A6741', opacity: 0.5 }}>{item.label}</div>
-                      <div className="text-sm" style={{ color: '#1A2E1A' }}>{item.value}</div>
+                      {item.href ? (
+                        <a href={item.href} className="cursor-pointer text-sm underline-offset-4 hover:underline" style={{ color: '#1A2E1A' }}>{item.value}</a>
+                      ) : (
+                        <div className="text-sm" style={{ color: '#1A2E1A' }}>{item.value}</div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -134,7 +164,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <div className="text-xs tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.35)' }}>Email</div>
-                    <div className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>contact@tchalovembakop.com</div>
+                    <a href={MAILTO_CONTACT} className="cursor-pointer text-sm hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}>contact@tchalovembakop.com</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">

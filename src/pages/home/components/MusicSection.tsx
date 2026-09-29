@@ -196,7 +196,7 @@ export default function MusicSection() {
                 {/* Full cover background */}
                 <img
                   src={track.cover}
-                  alt={track.title}
+                  alt={`Pochette du single ${track.title} de Tchalove Mbakop`}
                   className={`absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ${isActive ? 'scale-105' : 'group-hover:scale-103'}`}
                 />
                 {/* Gradient overlay — tropical tint */}

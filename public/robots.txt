@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /connexion
+Disallow: /inscription
+Disallow: /mon-compte
+
+Sitemap: https://tchalovembakop.com/sitemap.xml
