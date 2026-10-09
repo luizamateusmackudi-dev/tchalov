@@ -34,16 +34,19 @@ export default function HeroSection() {
         <i className="ri-plant-line text-[#4CAF7D]" style={{ fontSize: '80px' }} />
       </div>
 
-      {/* Background image — positioned right */}
+      {/* Vidéo d'arrière-plan — début du clip Meli, sans son */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute right-0 top-0 h-full w-full flex justify-end">
-          <img
-            src="https://public.readdy.ai/ai/img_res/3a56703f-dbca-4aac-96a9-c4f49a6fd21a.png"
-            alt="Tchalove Mbakop — Artiste Camerounaise"
-            className="h-full w-auto max-w-none object-contain object-right"
-            style={{ imageRendering: 'auto' }}
-          />
-        </div>
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/tchalove-mbakop-meli-clip-officiel.mp4"
+          poster="/videos/tchalove-mbakop-meli-clip-officiel.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-label="Tchalove Mbakop — extrait du clip Meli"
+        />
         {/* Fondu gauche léger — juste pour lisibilité du texte */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #FFFDF7 28%, rgba(255,253,247,0.6) 45%, transparent 65%)' }} />
         {/* Fondu bas très léger */}
