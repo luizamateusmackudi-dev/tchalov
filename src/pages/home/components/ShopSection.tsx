@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useCart } from '@/context/CartContext';
-import { supabase } from '@/lib/supabase';
+import { useState } from 'react';
 import ShareButton from './ShareButton';
+import { tracks } from '@/mocks/music';
 
 interface Product {
   id: number;
@@ -11,52 +10,18 @@ interface Product {
   media: { url: string; type: string }[];
 }
 
-export default function ShopSection() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [addedId, setAddedId] = useState<number | null>(null);
-  const { addItem } = useCart();
+// Site vitrine : produits affichés en dur, achat en ligne gelé (plus de Supabase)
+const products: Product[] = [
+  { id: 1, name: 'Meli', description: 'Single numérique', price: 5, media: [{ url: tracks[0].cover, type: 'image' }] },
+  { id: 2, name: 'Kelobouatom', description: 'Single numérique', price: 5, media: [{ url: tracks[1].cover, type: 'image' }] },
+  { id: 3, name: 'Meli + Kelobouatom', description: 'Les deux singles réunis', price: 8, media: [{ url: tracks[0].cover, type: 'image' }] },
+];
 
-  useEffect(() => {
-    supabase
-      .from('product_items')
-      .select('id, name, description, price, media')
-      .eq('status', 'active')
-      .order('id')
-      .then(({ data, error }) => {
-        if (!error && data) setProducts(data as Product[]);
-        setLoading(false);
-      });
-  }, []);
+export default function ShopSection() {
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   const singles = products.filter((p) => p.name !== 'Meli + Kelobouatom');
   const bundle = products.find((p) => p.name === 'Meli + Kelobouatom');
-
-  const handleAdd = (product: Product) => {
-    const image = product.media?.[0]?.url || '';
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image,
-      description: product.description,
-    });
-    setAddedId(product.id);
-    setTimeout(() => setAddedId(null), 2000);
-  };
-
-  if (loading) {
-    return (
-      <section id="shop" className="py-32 px-6" style={{ background: 'linear-gradient(180deg, #F0FBF4 0%, #FFFDF7 100%)' }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#4CAF7D', borderTopColor: 'transparent' }} />
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="shop" className="py-32 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F0FBF4 0%, #FFFDF7 100%)' }}>
@@ -90,7 +55,6 @@ export default function ShopSection() {
           <div className="flex flex-col gap-5">
             {singles.map((product) => {
               const isHovered = hoveredId === product.id;
-              const isAdded = addedId === product.id;
               const image = product.media?.[0]?.url || '';
 
               return (
@@ -135,18 +99,14 @@ export default function ShopSection() {
                       <div className="flex items-center gap-4">
                         <span className="font-playfair text-3xl" style={{ color: '#4CAF7D' }}>${product.price}</span>
                         <button
-                          onClick={() => handleAdd(product)}
-                          className="cursor-pointer whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300"
-                          style={isAdded
-                            ? { background: 'rgba(76,175,125,0.2)', border: '1px solid rgba(76,175,125,0.4)', color: '#4CAF7D' }
-                            : { background: 'linear-gradient(135deg, #2D7A4F, #4CAF7D)', color: '#fff' }
-                          }
+                          type="button"
+                          disabled
+                          aria-disabled="true"
+                          title="Achat en ligne bientôt disponible"
+                          className="cursor-not-allowed whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium tracking-wide opacity-50"
+                          style={{ background: 'linear-gradient(135deg, #2D7A4F, #4CAF7D)', color: '#fff' }}
                         >
-                          {isAdded ? (
-                            <><i className="ri-check-line" /> Ajouté !</>
-                          ) : (
-                            <><i className="ri-shopping-bag-line" /> Ajouter au panier</>
-                          )}
+                          <i className="ri-shopping-bag-line" /> Ajouter au panier
                         </button>
                       </div>
                     </div>
@@ -203,18 +163,14 @@ export default function ShopSection() {
                     <span className="text-white/30 text-sm line-through">$10</span>
                   </div>
                   <button
-                    onClick={() => handleAdd(bundle)}
-                    className="cursor-pointer whitespace-nowrap flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300"
-                    style={addedId === bundle.id
-                      ? { background: 'rgba(76,175,125,0.2)', border: '1px solid rgba(76,175,125,0.4)', color: '#4CAF7D' }
-                      : { background: 'linear-gradient(135deg, #2D7A4F, #4CAF7D)', color: '#fff' }
-                    }
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    title="Achat en ligne bientôt disponible"
+                    className="cursor-not-allowed whitespace-nowrap flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium tracking-wide opacity-50"
+                    style={{ background: 'linear-gradient(135deg, #2D7A4F, #4CAF7D)', color: '#fff' }}
                   >
-                    {addedId === bundle.id ? (
-                      <><i className="ri-check-line" /> Ajouté !</>
-                    ) : (
-                      <><i className="ri-shopping-bag-line" /> Ajouter au panier</>
-                    )}
+                    <i className="ri-shopping-bag-line" /> Ajouter au panier
                   </button>
                 </div>
               </div>
