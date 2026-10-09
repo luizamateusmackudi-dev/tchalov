@@ -103,7 +103,7 @@ export default function Navbar() {
             <a href="#" rel="nofollow" className="w-8 h-8 flex items-center justify-center transition-colors cursor-pointer" style={{ color: '#4CAF7D' }}>
               <i className="ri-spotify-line text-lg" />
             </a>
-            <a href="https://www.youtube.com/@TchaloveMbakopofficielle" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center transition-colors cursor-pointer" style={{ color: '#4CAF7D' }}>
+            <a href="https://www.youtube.com/@tchalovembakop" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center transition-colors cursor-pointer" style={{ color: '#4CAF7D' }}>
               <i className="ri-youtube-line text-lg" />
             </a>
 
@@ -210,7 +210,7 @@ export default function Navbar() {
               <a href="#" rel="nofollow" className="w-8 h-8 flex items-center justify-center cursor-pointer" style={{ color: '#4CAF7D' }}>
                 <i className="ri-spotify-line text-lg" />
               </a>
-              <a href="https://www.youtube.com/@TchaloveMbakopofficielle" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center cursor-pointer" style={{ color: '#4CAF7D' }}>
+              <a href="https://www.youtube.com/@tchalovembakop" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center cursor-pointer" style={{ color: '#4CAF7D' }}>
                 <i className="ri-youtube-line text-lg" />
               </a>
             </div>

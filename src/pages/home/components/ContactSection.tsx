@@ -93,7 +93,7 @@ export default function ContactSection() {
                 {[
                   { icon: 'ri-instagram-line', label: 'Instagram', href: '#' },
                   { icon: 'ri-spotify-line', label: 'Spotify', href: '#' },
-                  { icon: 'ri-youtube-line', label: 'YouTube', href: 'https://www.youtube.com/@TchaloveMbakopofficielle' },
+                  { icon: 'ri-youtube-line', label: 'YouTube', href: 'https://www.youtube.com/@tchalovembakop' },
                   { icon: 'ri-tiktok-line', label: 'TikTok', href: '#' },
                 ].map((s) => (
                   <a
@@ -139,7 +139,7 @@ export default function ContactSection() {
             <div className="flex flex-col items-center sm:items-start">
               <div className="text-xs tracking-[0.3em] uppercase mb-5 pb-3 w-full" style={{ color: 'rgba(76,175,125,0.6)', borderBottom: '1px solid rgba(76,175,125,0.1)' }}>YouTube</div>
               <a
-                href="https://www.youtube.com/@TchaloveMbakopofficielle"
+                href="https://www.youtube.com/@tchalovembakop"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cursor-pointer flex items-center gap-3 mb-4 group"
@@ -147,7 +147,7 @@ export default function ContactSection() {
                 <div className="w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-200 group-hover:scale-105" style={{ background: '#FF0000' }}>
                   <i className="ri-youtube-fill text-white text-2xl" />
                 </div>
-                <span className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>@TchaloveMbakopofficielle</span>
+                <span className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>@tchalovembakop</span>
               </a>
               <div className="font-playfair font-bold leading-none mt-2" style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'rgba(255,255,255,0.85)' }}>
                 Tchalove Mbakop
