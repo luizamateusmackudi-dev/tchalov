@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import CartDrawer from '@/components/feature/CartDrawer';
+import { supabaseActif } from '@/lib/supabase';
 
 const navLinks = [
   { label: 'Accueil', href: '#home' },
@@ -77,7 +78,8 @@ export default function Navbar() {
 
           {/* Right: Auth + Social + Cart */}
           <div className="hidden md:flex items-center gap-5">
-            {isAuthenticated ? (
+            {/* Comptes désactivés tant que Supabase n'est pas branché */}
+            {supabaseActif && (isAuthenticated ? (
               <Link
                 to="/mon-compte"
                 className="cursor-pointer flex items-center gap-1.5 text-sm tracking-widest uppercase font-light transition-all whitespace-nowrap"
@@ -95,7 +97,7 @@ export default function Navbar() {
                 <i className="ri-user-line" />
                 Connexion
               </Link>
-            )}
+            ))}
 
             <a href="#" rel="nofollow" className="w-8 h-8 flex items-center justify-center transition-colors cursor-pointer" style={{ color: '#4CAF7D' }}>
               <i className="ri-instagram-line text-lg" />
@@ -172,7 +174,7 @@ export default function Navbar() {
                 {link.label}
               </button>
             ))}
-            {isAuthenticated ? (
+            {supabaseActif && (isAuthenticated ? (
               <>
                 <Link
                   to="/mon-compte"
@@ -202,7 +204,7 @@ export default function Navbar() {
                 <i className="ri-user-line mr-1.5" />
                 Connexion / Inscription
               </Link>
-            )}
+            ))}
             <div className="flex gap-4 pt-2">
               <a href="#" rel="nofollow" className="w-8 h-8 flex items-center justify-center cursor-pointer" style={{ color: '#4CAF7D' }}>
                 <i className="ri-instagram-line text-lg" />
